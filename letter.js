@@ -32,12 +32,20 @@ var Word = function(word) {
     var dashLine = this.wordLine;
     var lineArr = this.lineArr;
     var wordLine = this.wordLine;
-    var wordLine2 = ''
-    if (noDupeArr.includes(guess)) {
-      var index = this.word.indexOf(guess);
-      lineArr[index] = guess + " ";
+    var wordLine2 = '';
+    var word = this.word;
+    var indices = [];
+    for(var i=0; i < word.length; i++) {
+      if (word[i] === guess) indices.push(i);
     }
-    for (i=0; i < lineArr.length; i++) {
+    if (noDupeArr.includes(guess)) {
+      for (var i = 0; i < lineArr.length; i++) {
+        if (indices.includes(i)) {
+          lineArr[i] = guess + " ";
+        }
+      }
+    }
+    for (var i=0; i < lineArr.length; i++) {
       wordLine2 += lineArr[i];
     }
     wordLine = wordLine2;
