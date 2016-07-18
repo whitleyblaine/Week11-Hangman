@@ -1,9 +1,7 @@
-var wordListString = "acres adult advice arrangement attempt August Autumn border breeze brick calm canal Casey cast chose claws coach constantly contrast cookies customs damage Danny deeply depth discussion doll donkey Egypt Ellen essential exchange exist explanation facing film finest fireplace floating folks fort garage grabbed grandmother habit happily Harry heading hunter Illinois image independent instant January kids label Lee lungs manufacturing Martin mathematics melted memory mill mission monkey Mount mysterious neighborhood Norway nuts occasionally official ourselves palace Pennsylvania Philadelphia plates poetry policeman positive possibly practical pride promised recall relationship remarkable require rhyme rocky rubbed rush sale satellites satisfied scared selection shake shaking shallow shout silly simplest slight slip slope soap solar species spin stiff swung tales thumb tobacco toy trap treated tune University vapor vessels wealth wolf zoo"
+// Import random word from game.js so we can pass it into the constructor
+var randomWord = require('./game.js').randomWord;
 
-var wordListArray = wordListString.split(' ');
-
-var randomWord = wordListArray[Math.floor(Math.random() * wordListArray.length)]
-
+// Constructor to control whether or not a letter appears as a "_" or as itself on-screen
 var Word = function(word) {
   this.word = word;
   this.splitWord = word.split('');
@@ -44,12 +42,11 @@ var Word = function(word) {
     }
     wordLine = wordLine2;
     console.log(wordLine);
-    console.log(wordLine.indexOf('_ '));
     if (wordLine.indexOf('_ ') < 0) {
       this.won = true;
     }
   }
 }
 
-// NEW keyword!!! Super important
+// Export new constructor instance with randomWord passed in
 module.exports.wordFunction = new Word(randomWord);
