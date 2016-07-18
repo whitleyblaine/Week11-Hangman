@@ -2,7 +2,27 @@ var wordListString = "acres adult advice arrangement attempt August Autumn borde
 
 var wordListArray = wordListString.split(' ');
 
-exports.currentWord = {
-  word: wordListArray[Math.floor(Math.random() * wordListArray.length)]
-};
+var randomWord = wordListArray[Math.floor(Math.random() * wordListArray.length)]
 
+// console.log(newWord);
+newWord.dashLine();
+
+
+var count = 0;
+var askForLetter = function() {
+  if (count < (parseInt(word.length) + parseInt(word.length)/2)) {
+    inquirer.prompt([{
+      type: "input",
+      name: "letterInput",
+      message: "Choose a letter!",
+    }]).then(function(input) {
+      letterCompare(input.letterInput.toLowerCase());
+      count++;
+      askForLetter();
+    })
+  } else {
+    console.log('All done!')
+  }
+}
+
+askForLetter();

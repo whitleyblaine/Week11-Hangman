@@ -1,34 +1,31 @@
-var requireWord = require('./game.js');
-var wordDasher = require('./letter.js');
 var inquirer = require('inquirer');
 var count = 0;
 
-var word = requireWord.currentWord.word.toLowerCase();
 
-console.log(word);
+var wordDasher = require('./letter.js');
 
-var letterCompare = function(letter) {
-  if (word.indexOf(letter) >= 0) {
-    console.log('correct!');
-  } else {
-    console.log('incorrect!');
-  }
-}
+wordDasher.wordFunction.allDashLine();
+console.log(wordDasher.wordFunction.wordLine);
 
 
 var askForLetter = function() {
-  if (count < (parseInt(word.length) + parseInt(word.length)/2)) {
+  if (count < (parseInt(wordDasher.wordFunction.word.length) + parseInt(wordDasher.wordFunction.word.length)/2)) {
     inquirer.prompt([{
       type: "input",
-      name: "letterInput",
+      name: "letter",
       message: "Choose a letter!",
     }]).then(function(input) {
-      letterCompare(input.letterInput.toLowerCase());
+      wordDasher.wordFunction.letterReplace(input.letter);
       count++;
       askForLetter();
     })
   } else {
-    console.log('All done!')
+    console.log('Game over! The word was ' + wordDasher.wordFunction.word);
+    if (wordDasher.wordFunction.won == true) {
+      console.log("YOU WON!!!!")
+    } else {
+      console.log("You lost.. :(");
+    }
   }
 }
 
